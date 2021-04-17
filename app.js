@@ -22,5 +22,3 @@ app.use("/users", usersRouter);
 app.use("/api", apiRouter);
 
 module.exports = app;
-
-//sbisa9y8hdbuiohip
