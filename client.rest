@@ -1,0 +1,68 @@
+GET http://localhost:8080/register
+
+###
+
+POST http://localhost:8080/register 
+Content-Type: application/json
+
+{
+    "username": "New user",
+    "email": "user@gmail.com",
+    "password": "12345678",
+    "confirmPassword": "12345678"
+}
+
+###
+
+GET http://localhost:8080/login
+
+### 
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "email": "user@gmail.com",
+    "password": "12345678"
+}
+
+###
+
+GET http://localhost:8080/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmV3IHVzZXIiLCJpYXQiOjE2MTg2NzU2ODEsImV4cCI6MTYxODY3NTcxMX0.kuodDQ2zXeAAMCIhZqhuaECG8JDvQMliPZ3gWnic3ag
+
+### 
+
+POST http://localhost:8080/login/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmV3IHVzZXIiLCJpYXQiOjE2MTg2NzU1ODV9.6_NeGWnrtRCxDFN2FH92w2e_Vw4BXHVySy2RVJJV4As"
+}
+
+###
+
+DELETE http://localhost:8080/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmV3IHVzZXIiLCJpYXQiOjE2MTg2NzU1ODV9.6_NeGWnrtRCxDFN2FH92w2e_Vw4BXHVySy2RVJJV4As"
+}
+
+###
+
+GET http://localhost:8080/users
+
+###
+
+POST http://localhost:8080/users/edit
+Content-Type: application/json
+
+{
+    "id": "607b105520f8c42be03c49fe",
+    "username": "Username"
+}
+
+###
+
+GET http://localhost:8080/api/image/1gfhcjh3.jpeg
