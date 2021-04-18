@@ -1,9 +1,16 @@
 const express = require("express");
 const app = express();
+const { auth } = require("./middleware/auth");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(
+    require("cors")({
+        credentials: true,
+    })
+);
+app.use(require("./middleware/controlOrigin"));
 
 // Using ejs template to create dinamic pages for testing
 app.set("view engine", "ejs");

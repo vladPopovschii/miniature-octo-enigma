@@ -11,11 +11,11 @@ server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
 // Using WebSockets (socket.io)
 
 const io = require("socket.io")(server, {
-    // cors: {
-    //     origin: "httpl://localhost:8080",
-    //     methods: ["GET", "POST"],
-    //     credentials: true,
-    // },
+    cors: {
+        origin: "httpl://localhost:8080",
+        methods: ["GET", "POST"],
+        credentials: true,
+    },
 });
 const configureSocket = require("./configs/socket.io");
 configureSocket(io);

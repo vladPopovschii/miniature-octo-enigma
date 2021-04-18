@@ -5,6 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=\, initial-scale=1.0" />
         <title>Document</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            // const userid = prompt("User id: ");
+            // socket.auth = { userId };
+            // socket.connect();
+        </script>
     </head>
     <body>
         <form
@@ -24,5 +31,17 @@
                 alt="image not found"
             />
         </form>
+        <input class="input" type="text" />
+        <button>Send</button>
+        <script>
+            const button = document.querySelector("button");
+            const input = document.querySelector(".input");
+            button.addEventListener("click", (e) => {
+                socket.emit("send-message", receiver, input.value);
+            });
+            socket.on("receive-message", (text, senderID) => {
+                alert(text + " " + senderID);
+            });
+        </script>
     </body>
 </html>

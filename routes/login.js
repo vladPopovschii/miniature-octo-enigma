@@ -25,14 +25,14 @@ router.post("/", async (req, res) => {
             return res.json({ message: "Wrong password, try again" });
 
         const token = jwt.sign(
-            { username: user.username },
+            { id: user.id },
             process.env.JWT_ACCES_TOKEN_KEY,
             {
                 expiresIn: TOKEN_TIME,
             }
         );
         const refreshToken = jwt.sign(
-            { username: user.username },
+            { id: user.id },
             process.env.JWT_REFRESH_TOKEN_KEY
         );
         await Token.create({
@@ -59,7 +59,7 @@ router.post("/token", async (req, res) => {
         if (err) return res.status(403).json({ message: "Frobidden" });
 
         const accesToken = jwt.sign(
-            { username: user.username },
+            { id: user.id },
             process.env.JWT_ACCES_TOKEN_KEY,
             {
                 expiresIn: TOKEN_TIME,
