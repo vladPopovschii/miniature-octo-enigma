@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const User = require("../models/user");
-const uploadImage = require("../configs/uploadImage");
+const { upload } = require("../configs/uploadImage");
 
 router.get("/", async (req, res) => {
     const users = await User.find({});
@@ -42,8 +42,23 @@ router.post("/edit", async (req, res) => {
 
 // Endpoint for uploading user avatar
 
-router.post("/edit-profile-image", (req, res) => {
-    uploadImage.single();
-});
+router.post(
+    "/edit-profile-image",
+    upload.single("avatar"),
+    async (req, res) => {
+        const { id } = req.body;
+        try {
+            const user = await User.findByIdAndUpdate(id, {
+                profileImage: req.file.filename,
+            });
+            res.json({
+                user,
+                message: "Image updated",
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+);
 
 module.exports = router;

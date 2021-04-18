@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=\, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form
+            action="/users/edit-profile-image"
+            method="post"
+            enctype="multipart/form-data"
+        >
+            <div>
+                <label for="image-upload">Upload image</label>
+                <input type="file" name="avatar" />
+                <input type="text" name="id" />
+            </div>
+            <button type="submit">Upload</button>
+
+            <img
+                src="/api/image/1618753020098-Album 1.png"
+                alt="image not found"
+            />
+        </form>
+    </body>
+</html>

@@ -29,7 +29,23 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmV3IHVzZXIiLCJpYXQiOjE2MTg2NzU2ODEsImV4cCI6MTYxODY3NTcxMX0.kuodDQ2zXeAAMCIhZqhuaECG8JDvQMliPZ3gWnic3ag
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlVzZXJuYW1lIiwiaWF0IjoxNjE4NzU3MTIxLCJleHAiOjE2MTg3NTc3MjF9.6jVtuFRyrr5CGPlD6HaWBBlbh9zZcxE9oZP0QfeYFzQ
+
+###
+
+GET http://localhost:8080/posts/607c459ec38e2804f40d4fcf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlVzZXJuYW1lIiwiaWF0IjoxNjE4NzU3MTIxLCJleHAiOjE2MTg3NTc3MjF9.6jVtuFRyrr5CGPlD6HaWBBlbh9zZcxE9oZP0QfeYFzQ
+
+###
+
+POST http://localhost:8080/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlVzZXJuYW1lIiwiaWF0IjoxNjE4NzU1ODM0LCJleHAiOjE2MTg3NTY0MzR9.HiPlzjcbOsqbnrGNNH-eg4FJ_O19Yf9JeCIt_MiYZeM
+Content-Type: application/json
+
+{
+    "title": "Post title",
+    "content": "Post content"
+}
 
 ### 
 
@@ -65,4 +81,6 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/image/1gfhcjh3.jpeg
+GET http://localhost:8080/api/image/1618752325839-95d2b5818a5a2618a566f926e0293594.jpg
+
+###

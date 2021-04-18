@@ -5,7 +5,7 @@ const router = Router();
 const User = require("../models/user");
 const Token = require("../models/token");
 
-const TOKEN_TIME = 30;
+const TOKEN_TIME = "10m";
 
 router.get("/", (req, res) => {
     res.send("Login page");
