@@ -12,7 +12,7 @@ server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: "httpl://localhost:8080",
+        origin: "http://localhost:8080",
         methods: ["GET", "POST"],
         credentials: true,
     },
