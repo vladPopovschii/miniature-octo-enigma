@@ -64,8 +64,25 @@ class AuthService {
             });
             return data.data.user;
         } catch (error) {
-            // console.error(error);
-            return null;
+            const refreshToken = JSON.parse(
+                localStorage.getItem(KEYS.LOCAL_STORAGE_REFRESH_TOKEN)
+            );
+            console.log(refreshToken);
+            if (!refreshToken) return null;
+            try {
+                const token = await axios.post(`${URL}login/token`, {
+                    refreshToken,
+                });
+                if (!token) return null;
+                localStorage.setItem(KEYS.LOCAL_STORAGE_TOKEN, token);
+                const data = await axios.get(`${URL}users/user`, {
+                    headers: authHeader(),
+                });
+                return data.data.user;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
         }
     }
     async token() {

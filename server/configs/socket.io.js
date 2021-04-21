@@ -1,24 +1,41 @@
+const Message = require("../models/message");
+const Chatroom = require("../models/chatroom");
+
 // Socket.io configuration
 
 function configureSocket(io) {
+    const users = {};
+
     io.use((socket, next) => {
-        const userId = socket.handshake.auth.id;
-        console.log("socket.io middlewaew");
-        socket.userId = userId || "someafiubn";
+        const userId = socket.handshake.query.auth;
+        socket.userId = userId;
+        users[userId] = socket.id;
         next();
     });
 
     io.on("connection", (socket) => {
-        console.log("User connected" + socket.id + " " + socket.userId);
-
-        socket.on("send-message", (receiverId, text) => {
-            socket.broadcast
-                .to(receiverId)
-                .emit("receive-message", text, socket.userId);
+        socket.on("send-message", async (roomId, receiverId, message) => {
+            try {
+                const messageDoc = new Message({
+                    user: socket.userId,
+                    body: message,
+                });
+                await Chatroom.findByIdAndUpdate(roomId, {
+                    $push: {
+                        messages: messageDoc,
+                    },
+                });
+                await messageDoc.save();
+                socket.broadcast
+                    .to(users[receiverId])
+                    .emit("receive-message", messageDoc, socket.userId);
+            } catch (error) {
+                console.log(error);
+            }
         });
 
         socket.on("disconnected", () => {
-            console.log("User disconnected!");
+            delete users[socket[socket.userId]];
         });
     });
 }

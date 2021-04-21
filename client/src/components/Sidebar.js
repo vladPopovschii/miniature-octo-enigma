@@ -2,20 +2,24 @@ import React, { useState, useEffect } from "react";
 import UserService from "../services/UserService";
 import { KEYS } from "../KEYS";
 
-export default function Sidebar({ user }) {
+export default function Sidebar({ user, changeChat }) {
     const [users, setUsers] = useState([]);
 
     useEffect(async () => {
-        const newUsers = await UserService.getAllUsers();
+        let newUsers = await UserService.getAllUsers();
+        newUsers = newUsers.filter((newUser) => newUser._id !== user?._id);
         setUsers(newUsers);
-        console.log(users);
     }, []);
 
     return (
         <div className="sidebar">
             <ul className="sidebar-list">
                 {users.map((user) => (
-                    <li className="sidebar-item" key={user._id}>
+                    <li
+                        className="sidebar-item"
+                        key={user._id}
+                        onClick={() => changeChat(user)}
+                    >
                         <img
                             src={`${KEYS.API_URL}api/image/${user.profileImage}`}
                         ></img>

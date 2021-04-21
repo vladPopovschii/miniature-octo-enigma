@@ -5,7 +5,7 @@ const router = Router();
 const User = require("../models/user");
 const Token = require("../models/token");
 
-const TOKEN_TIME = "10m";
+const TOKEN_TIME = "20m";
 
 router.get("/", (req, res) => {
     res.send("Login page");
@@ -48,7 +48,6 @@ router.post("/", async (req, res) => {
 
 router.post("/token", async (req, res) => {
     const { token } = req.body;
-
     if (!token)
         return res.status(401).json({ message: "Refresh Token Missing" });
 
@@ -56,7 +55,7 @@ router.post("/token", async (req, res) => {
         return res.status(403).json({ message: "Forbidden" });
 
     jwt.verify(token, process.env.JWT_REFRESH_TOKEN_KEY, (err, user) => {
-        if (err) return res.status(403).json({ message: "Frobidden" });
+        if (err) return res.status(403).json({ message: "Forbidden" });
 
         const accesToken = jwt.sign(
             { id: user.id },

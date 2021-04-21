@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import io from "socket.io-client";
 
 const SocketContext = React.createContext();
@@ -11,8 +11,10 @@ export function SocketProvider({ id, children }) {
     const [socket, setSocket] = useState();
 
     useEffect(() => {
-        const newSocket = io("http://localhost:8080", { query: { auth: id } });
-
+        const newSocket = io("http://localhost:8080", {
+            query: { auth: id },
+            transports: ["websocket"],
+        });
         setSocket(newSocket);
 
         return () => newSocket.close();
