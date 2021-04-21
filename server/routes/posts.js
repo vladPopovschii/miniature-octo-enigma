@@ -7,8 +7,9 @@ const Post = require("../models/post");
 
 router.get("/", auth, async (req, res) => {
     try {
-        const posts = await Post.find({});
-
+        const posts = await Post.find({})
+            .populate("owner")
+            .sort([["createdAt", -1]]);
         res.json({
             posts,
         });
@@ -36,10 +37,12 @@ router.post("/", async (req, res) => {
             title,
             content,
             description,
+            owner: req.id,
         });
         await post.save();
+        const populatedPost = await Post.findById(post.id).populate("owner");
         res.json({
-            post,
+            post: populatedPost,
         });
     } catch (error) {
         console.error(error);

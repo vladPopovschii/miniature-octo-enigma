@@ -15,7 +15,7 @@ app.use(require("./middleware/controlOrigin"));
 // Using ejs template to create dinamic pages for testing
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => res.render("index"));
+app.get("/", auth, (req, res) => res.json({ message: "home" }));
 
 // routers
 
@@ -29,8 +29,8 @@ const apiRouter = require("./routes/api");
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
-app.use("/users", usersRouter);
-app.use("/posts", postsRouter);
+app.use("/users", auth, usersRouter);
+app.use("/posts", auth, postsRouter);
 app.use("/api", apiRouter);
 
 // Error handler middleware

@@ -7,11 +7,11 @@ function auth(req, res, next) {
     if (authHeader) {
         const token = authHeader.split(" ")[1];
 
-        jwt.verify(token, process.env.JWT_ACCES_TOKEN_KEY, (err, user) => {
+        jwt.verify(token, process.env.JWT_ACCES_TOKEN_KEY, (err, payload) => {
             if (err) {
                 return res.status(403).json({ message: "forbidden" });
             }
-            req.user = user;
+            req.id = payload.id;
             next();
         });
     } else {

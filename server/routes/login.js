@@ -19,10 +19,10 @@ router.post("/", async (req, res) => {
         const user = await User.findOne({ email });
         if (!user)
             return res.json({
-                message: "User with that email does not exists",
+                error: "User with that email does not exists",
             });
         if (!(await bcrypt.compare(password, user.password)))
-            return res.json({ message: "Wrong password, try again" });
+            return res.json({ error: "Wrong password, try again" });
 
         const token = jwt.sign(
             { id: user.id },

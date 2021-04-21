@@ -14,13 +14,13 @@ router.post("/", async (req, res) => {
 
     try {
         if (await User.findOne({ email }))
-            return res.json({ message: "User with that email already exists" });
+            return res.json({ error: "User with that email already exists" });
         if (password.length < 8)
             return res.json({
-                message: "Password must contain at least 8 characters",
+                error: "Password must contain at least 8 characters",
             });
         if (password !== confirmPassword)
-            return res.json({ message: "Passwords must match" });
+            return res.json({ error: "Passwords must match" });
 
         const user = new User({
             email,
