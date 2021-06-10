@@ -1,7 +1,7 @@
-# miniature-octo-enigma
-## This is a chat application made with MERN stack
+### miniature-octo-enigma
+#### This is a chat application made with MERN stack
 
-### Environmental variables
+##### Environmental variables
 - DATABASE_URI
 - JWT_ACCES_TOKEN_KEY
 - JWT_REFRESH_TOKEN_KEY
